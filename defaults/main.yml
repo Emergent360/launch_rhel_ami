@@ -1,5 +1,3 @@
 ---
 # defaults file for launch_rhel_ami
-EC2_SUBNET_ID:
-  - "{{ SUBNET_1 }}"
-  - "{{ SUBNET_2 }}"
+ami_name: "RHEL-8.2-x86_64-Minimal-10GiB-HVM*"
