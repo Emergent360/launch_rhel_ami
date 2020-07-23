@@ -29,6 +29,7 @@
   set_fact:
     subnet_ids: "{{ subnet_info.subnets
     | selectattr('id', 'defined')
+    | map(attribute='id')
     | list }}"
 
 - name: "Find current, region-specific Windows AMI."
