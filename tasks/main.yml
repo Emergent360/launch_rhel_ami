@@ -39,17 +39,17 @@
 
 - name: "Set AMI value"
   set_fact:
-    win_ami: "{{ found_amis.images | selectattr('name', 'defined') | sort(attribute='creation_date') | last }}"
+    rhel_ami: "{{ found_amis.images | selectattr('name', 'defined') | sort(attribute='creation_date') | last }}"
   when: found_amis.images is defined
 
-- name: "Start Windows instances."
+- name: "Start RHEL instances."
   ec2:
     key_name: "{{ ec2_name_prefix }}-key"
     region: "{{ ec2_region }}"
-    image: "{{ win_ami.image_id }}"
+    image: "{{ rhel_ami.image_id }}"
     instance_type: "{{ instance_type }}"
     group_id: "{{ sg_net_facts.security_groups[0].group_id }}"
-    vpc_subnet_id: "{{ subnet_info.subnets[0].id }}"
+    vpc_subnet_id: "{{ item }}"
     wait: yes
     wait_timeout: 500
     exact_count: "{{ instance_count }}"
@@ -59,14 +59,14 @@
       Name: "{{ instance_tag_inventory }} Windows Server"
       Inventory: "{{ instance_tag_inventory }}"
     user_data: "{{ lookup('template', '{{ role_path }}/templates/userdata.txt.j2') }}"
+  loop: "{{ subnet_ids }}"
   register: ec2_result
 
 - debug:
     msg: "{{ ec2_result }}"
 
-- name: "Wait for WinRM on all hosts."
-  wait_for:
-    port: 5986
+- name: "Wait for connection on all hosts."
+  wait_for_connection:
     host: "{{ item.public_ip }}"
     timeout: 300
   loop: "{{ ec2_result.instances }}"
