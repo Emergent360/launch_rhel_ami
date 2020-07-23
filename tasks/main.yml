@@ -20,18 +20,14 @@
     region: "{{ ec2_region }}"
     filters:
       vpc-id: "{{ vpc_net_facts.vpcs[0].id }}"
-      "tag:Alias": "{{ item }}"
-  loop:
-    - Subnet_1
-    - Subnet_2
   register: subnet_info
 
 - debug:
-    msg: "{{ subnet_info.results }}"
+    msg: "{{ subnet_info }}"
 
 - name: Get subnet ids
   set_fact:
-    subnet_ids: "{{ subnet_info.results
+    subnet_ids: "{{ subnet_info
     | selectattr('subnets', 'defined')
     | list }}"
 
