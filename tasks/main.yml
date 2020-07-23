@@ -59,7 +59,6 @@
       Name: "{{ instance_tag_inventory }} RHEL Server {{ item.index }}"
       Inventory: "{{ instance_tag_inventory }}"
       Stage: "provisioned"
-    user_data: "{{ lookup('template', '{{ role_path }}/templates/userdata.txt.j2') }}"
   loop: "{{ vpc_subnets }}"
   register: ec2_result
 
