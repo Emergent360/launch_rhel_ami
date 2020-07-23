@@ -31,7 +31,7 @@
 
 - name: Get subnet ids
   set_fact:
-    subnet_ids: "{{ subnet_info.subnets
+    subnet_ids: "{{ subnet_info.results.subnets
       | selectattr('subnet_id', 'defined')
       | map(attribute='subnet_id')
       | list
