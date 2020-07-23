@@ -31,7 +31,10 @@
       | unique }}"
 
 - debug:
-    msg: "{{ subnet_info }}"
+    msg: "{{ item }} with index {{ my_idx }}"
+  loop: "{{ subnet_ids }}"
+  loop_control:
+    index_var: my_idx
 
 - name: "Find current, region-specific Windows AMI."
   ec2_ami_info:
@@ -59,10 +62,12 @@
     count_tag:
       count_tag: Name
     instance_tags:
-      Name: "{{ instance_tag_inventory }} Windows Server"
+      Name: "{{ instance_tag_inventory }} RHEL Server "
       Inventory: "{{ instance_tag_inventory }}"
+      Stage: "provisioned"
     user_data: "{{ lookup('template', '{{ role_path }}/templates/userdata.txt.j2') }}"
   loop: "{{ subnet_ids }}"
+  with_
   register: ec2_result
 
 - debug:
