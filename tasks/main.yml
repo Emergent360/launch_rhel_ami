@@ -30,6 +30,9 @@
       | list
       | unique }}"
 
+- debug:
+    msg: "{{ subnet_info }}"
+
 - name: "Find current, region-specific Windows AMI."
   ec2_ami_info:
     region: "{{ ec2_region }}"
