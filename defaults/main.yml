@@ -1,2 +1,5 @@
 ---
 # defaults file for launch_rhel_ami
+EC2_SUBNET_ID:
+  - "{{ SUBNET_1 }}"
+  - "{{ SUBNET_2 }}"
