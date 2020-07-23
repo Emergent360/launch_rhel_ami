@@ -32,10 +32,8 @@
 - name: Get subnet ids
   set_fact:
     subnet_ids: "{{ subnet_info.results
-    | selectattr('subnets.id', 'defined')
-    | map(attribute='subnets.id')
-    | list
-    | unique }}"
+    | selectattr('subnets[0].id', 'defined'
+    | list }}"
 
 - name: "Find current, region-specific Windows AMI."
   ec2_ami_info:
