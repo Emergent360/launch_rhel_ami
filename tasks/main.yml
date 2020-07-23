@@ -25,8 +25,8 @@
 - name: Get subnet ids
   set_fact:
     subnet_ids: "{{ subnet_info
-      | selectattr('subnet.id', 'defined')
-      | map(attribute='subnet.id')
+      | selectattr('subnets.id', 'defined')
+      | map(attribute='subnets.id')
       | list
       | unique }}"
 
