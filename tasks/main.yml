@@ -23,7 +23,7 @@
   register: subnet_info
 
 - debug:
-    msg: "{{ subnet_info }}"
+    msg: "{{ subnet_info.subnets }}"
 
 - name: Get subnet ids
   set_fact:
