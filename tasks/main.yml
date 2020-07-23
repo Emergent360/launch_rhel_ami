@@ -30,12 +30,6 @@
       | list
       | unique }}"
 
-- debug:
-    msg: "{{ item }} with index {{ my_idx }}"
-  loop: "{{ subnet_ids }}"
-  loop_control:
-    index_var: my_idx
-
 - name: "Find current, region-specific Windows AMI."
   ec2_ami_info:
     region: "{{ ec2_region }}"
@@ -55,18 +49,18 @@
     image: "{{ rhel_ami.image_id }}"
     instance_type: "{{ instance_type }}"
     group_id: "{{ sg_net_facts.security_groups[0].group_id }}"
-    vpc_subnet_id: "{{ item }}"
+    vpc_subnet_id: "{{ item.alias }}"
     wait: yes
     wait_timeout: 500
     exact_count: "{{ instance_count }}"
     count_tag:
       count_tag: Name
     instance_tags:
-      Name: "{{ instance_tag_inventory }} RHEL Server "
+      Name: "{{ instance_tag_inventory }} RHEL Server {{ item.index }}"
       Inventory: "{{ instance_tag_inventory }}"
       Stage: "provisioned"
     user_data: "{{ lookup('template', '{{ role_path }}/templates/userdata.txt.j2') }}"
-  loop: "{{ subnet_ids }}"
+  loop: "{{ vpc_subnets }}"
   register: ec2_result
 
 - debug:
