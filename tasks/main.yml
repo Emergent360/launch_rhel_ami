@@ -27,7 +27,7 @@
 
 - debug:
     msg: "Entry {{ item.key }} is {{ item.value }}"
-  loop: "{{ lookup('dict', subnet_info.subnets"
+  loop: "{{ lookup('dict', subnet_info.subnets) }}"
 
 - name: Get subnet ids
   set_fact:
