@@ -3,3 +3,8 @@
 ami_name: "RHEL-8.2-x86_64-Minimal-10GiB-HVM*"
 instance_count: 2
 instance_tag_inventory: "{{ ec2_name_prefix }}"
+vpc_subnets:
+  - index: 1
+    alias: "Subnet_1"
+  - index: 2
+    alias: "Subnet_2"
