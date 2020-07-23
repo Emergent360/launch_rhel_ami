@@ -67,7 +67,6 @@
       Stage: "provisioned"
     user_data: "{{ lookup('template', '{{ role_path }}/templates/userdata.txt.j2') }}"
   loop: "{{ subnet_ids }}"
-  with_
   register: ec2_result
 
 - debug:
