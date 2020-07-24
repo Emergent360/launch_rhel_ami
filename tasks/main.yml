@@ -59,7 +59,7 @@
 
 - name: "Wait for connection on all hosts."
   wait_for_connection:
-    host: "{{ item.tagged_instances.public_ip }}"
+    host: "{{ item.tagged_instances[0].public_ip }}"
     timeout: 300
   loop: "{{ ec2.results }}"
 
