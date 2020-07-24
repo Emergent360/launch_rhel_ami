@@ -22,18 +22,15 @@
       vpc-id: "{{ vpc_net_facts.vpcs[0].id }}"
   register: subnet_info
 
-- debug:
-    msg: "{{ subnet_info.subnets }}"
-
-- debug:
-    msg: "{{ subnet_info.subnets | selectattr('tags.Alias') | map(attribute='subnet_id') | list }}"
-
 - set_fact:
     subnet_list: "{{ subnet_list | default([]) + [ { 'alias': item.tags.Alias, 'subnet_id': item.subnet_id } ] }}"
   loop: "{{ subnet_info.subnets }}"
 
 - debug:
     msg: "{{ subnet_list }}"
+
+- debug:
+    msg: "RHEL server {{ item.alias | regex_replace('^.*_(.*)$', '\\1') }}"
 
 - name: "Find current, region-specific Windows AMI."
   ec2_ami_info:
