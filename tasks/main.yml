@@ -26,15 +26,15 @@
     msg: "{{ subnet_info.subnets }}"
 
 - debug:
-    msg: "Entry {{ item.key }} is {{ item.value }}"
-  loop: "{{ lookup('dict', subnet_info.subnets) }}"
+    msg: "{{ subnet_info.subnets | selectattr('Alias') | map(attribute='subnet_id') | list }}"
 
-- name: Get subnet ids
-  set_fact:
-    subnet_ids: "{{ subnet_info.subnets
-    | selectattr('id', 'defined')
-    | map(attribute='id')
-    | list }}"
+
+#- name: Get subnet ids
+#  set_fact:
+#    subnet_ids: "{{ subnet_info.subnets
+#    | selectattr('id', 'defined')
+#    | map(attribute='id')
+#    | list }}"
 
 - name: "Find current, region-specific Windows AMI."
   ec2_ami_info:
