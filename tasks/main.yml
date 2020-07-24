@@ -61,5 +61,5 @@
   wait_for_connection:
     host: "{{ item.instances.public_ip }}"
     timeout: 300
-  loop: "{{ ec2.result }}"
+  loop: "{{ ec2.results }}"
 
