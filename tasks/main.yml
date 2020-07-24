@@ -26,7 +26,7 @@
     msg: "{{ subnet_info.subnets }}"
 
 - debug:
-    msg: "{{ subnet_info.subnets | selectattr('Alias') | map(attribute='subnet_id') | list }}"
+    msg: "{{ subnet_info.subnets | selectattr('tags.Alias') | map(attribute='subnet_id') | list }}"
 
 
 #- name: Get subnet ids
