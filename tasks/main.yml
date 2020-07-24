@@ -32,9 +32,9 @@
     subnet_list: "{{ subnet_list | default([]) + [ { 'alias': item.tags.Alias, 'subnet_id': item.subnet_id } ] }}"
   loop: "{{ subnet_info.subnets }}"
 
--debug:
+- debug:
     msg: "{{ subnet_list }}"
-    
+
 - name: "Find current, region-specific Windows AMI."
   ec2_ami_info:
     region: "{{ ec2_region }}"
