@@ -22,17 +22,6 @@
       vpc-id: "{{ vpc_net_facts.vpcs[0].id }}"
   register: subnet_info
 
-- set_fact:
-    subnet_list: "{{ subnet_list | default([]) + [ { 'alias': item.tags.Alias, 'subnet_id': item.subnet_id } ] }}"
-  loop: "{{ subnet_info.subnets }}"
-
-- debug:
-    msg: "{{ subnet_list }}"
-
-- debug:
-    msg: "RHEL server {{ item.alias | regex_replace('^.*_(.*)$', '\\1') }}"
-  loop: "{{ subnet_list }}"
-
 - name: "Find current, region-specific Windows AMI."
   ec2_ami_info:
     region: "{{ ec2_region }}"
@@ -63,19 +52,11 @@
       Inventory: "{{ instance_tag_inventory }}"
       Stage: "instantiated"
   loop: "{{ subnet_info.subnets }}"
-  register: ec2_result
-
-- debug:
-    msg: "{{ ec2_result }}"
+  register: ec2
 
 - name: "Wait for connection on all hosts."
   wait_for_connection:
-    host: "{{ item.public_ip }}"
+    host: "{{ item.instances.public_ip }}"
     timeout: 300
-  loop: "{{ ec2_result.instances }}"
-
-- name: Show public IP
-  debug:
-    msg: "Public IP: {{ item.public_ip }}"
-  loop: "{{ ec2_result.instances }}"
+  loop: "{{ ec2.result }}"
 
