@@ -52,17 +52,17 @@
     image: "{{ rhel_ami.image_id }}"
     instance_type: "{{ instance_type }}"
     group_id: "{{ sg_net_facts.security_groups[0].group_id }}"
-    vpc_subnet_id: "{{ item.alias }}"
+    vpc_subnet_id: "{{ item.subnet_id }}"
     wait: yes
     wait_timeout: 500
     exact_count: "{{ instance_count }}"
     count_tag:
       count_tag: Name
     instance_tags:
-      Name: "{{ instance_tag_inventory }} RHEL Server {{ item.index }}"
+      Name: "{{ instance_tag_inventory }} RHEL server {{ item.alias | regex_replace('^.*_(.*)$', '\\1') }}"
       Inventory: "{{ instance_tag_inventory }}"
       Stage: "provisioned"
-  loop: "{{ vpc_subnets }}"
+  loop: "{{ subnet_info.subnets }}"
   register: ec2_result
 
 - debug:
