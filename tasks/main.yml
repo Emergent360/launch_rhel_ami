@@ -29,7 +29,7 @@
     msg: "{{ subnet_info.subnets | selectattr('tags.Alias') | map(attribute='subnet_id') | list }}"
 
 - set_fact:
-    subnet_list: "{{ subnet_list | default([]) + [ { 'alias': item.tags.Alias, 'subnet_id': item.subnet_id } ] }}"
+    subnet_list: "{{ subnet_list | default({}) | combine( { 'alias': item.tags.Alias, 'subnet_id': item.subnet_id } ) }}"
   loop: "{{ subnet_info.subnets }}"
 
 - debug:
