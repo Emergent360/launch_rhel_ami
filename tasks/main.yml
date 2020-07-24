@@ -22,7 +22,7 @@
       vpc-id: "{{ vpc_net_facts.vpcs[0].id }}"
   register: subnet_info
 
-- name: "Find current, region-specific Windows AMI."
+- name: "Find current, region-specific AMI."
   ec2_ami_info:
     region: "{{ ec2_region }}"
     filters:
