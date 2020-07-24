@@ -61,7 +61,7 @@
     instance_tags:
       Name: "{{ instance_tag_inventory }} RHEL server {{ item.tags.Alias | regex_replace('^.*_(.*)$', '\\1') }}"
       Inventory: "{{ instance_tag_inventory }}"
-      Stage: "provisioned"
+      Stage: "instantiated"
   loop: "{{ subnet_info.subnets }}"
   register: ec2_result
 
