@@ -56,6 +56,9 @@
   register: ec2
 
 - debug:
+    msg: "{{ ec2.results }}"
+
+- debug:
     msg: "{{ item.tagged_instances[0].public_ip }}"
   loop: "{{ ec2.results }}"
 
