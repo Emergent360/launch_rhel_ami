@@ -56,12 +56,6 @@
   loop: "{{ subnet_info.subnets }}"
   register: ec2
 
-- name: Update stage to instantiated
-  set_fact:
-    provisioning_stage: "instantiated"
-    cacheable: yes
-  when: ec2 is not failed
-
 - name: "Wait for connection on all hosts."
   wait_for:
     host: "{{ item.tagged_instances[0].public_ip }}"
