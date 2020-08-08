@@ -46,10 +46,10 @@
     wait_timeout: 500
     exact_count: "{{ instance_count }}"
     count_tag:
-      Name: "{{ instance_tag_inventory }} RHEL server
+      Name: "{{ instance_tag_inventory }} RHEL server"
     instance_tags:
       Role: rhel_server
-      Name: "{{ instance_tag_inventory }} RHEL server
+      Name: "{{ instance_tag_inventory }} RHEL server"
       Inventory: "{{ instance_tag_inventory }}"
       Stage: "instantiated"
   register: ec2
