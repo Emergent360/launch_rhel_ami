@@ -62,5 +62,5 @@
     host: "{{ item.public_ip }}"
     port: 22
     timeout: 300
-  loop: "{{ ec2.tagged_instances[0] }}"
+  loop: "{{ ec2.tagged_instances }}"
 
