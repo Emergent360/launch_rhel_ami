@@ -48,8 +48,7 @@
     count_tag:
       Name: "{{ instance_tag_inventory }} RHEL server
     instance_tags:
-      Role: service_cluster
-      Cluster: "{{ cluster_id }}"
+      Role: rhel_server
       Name: "{{ instance_tag_inventory }} RHEL server
       Inventory: "{{ instance_tag_inventory }}"
       Stage: "instantiated"
