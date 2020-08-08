@@ -41,7 +41,7 @@
     image: "{{ rhel_ami.image_id }}"
     instance_type: "{{ instance_type }}"
     group_id: "{{ sg_net_facts.security_groups[0].group_id }}"
-    vpc_subnet_id: "{{ subnet_info.subnets.subnet_id }}"
+    vpc_subnet_id: "{{ subnet_info.subnets[0].id }}"
     wait: yes
     wait_timeout: 500
     exact_count: "{{ instance_count }}"
