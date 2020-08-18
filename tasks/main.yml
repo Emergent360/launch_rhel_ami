@@ -49,6 +49,7 @@
       Name: "{{ instance_tag_inventory }} RHEL server"
     instance_tags:
       Role: rhel_server
+      Platform: RHEL
       Name: "{{ instance_tag_inventory }} RHEL server"
       Inventory: "{{ instance_tag_inventory }}"
       Stage: "instantiated"
