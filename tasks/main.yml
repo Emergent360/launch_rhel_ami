@@ -56,7 +56,7 @@
   register: ec2
 
 - debug:
-    msg: "{{ ec.tagged_instances }}"
+    msg: "{{ ec2.tagged_instances }}"
 
 - name: "Wait for connection on all hosts."
   wait_for:
