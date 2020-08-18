@@ -57,7 +57,7 @@
 
 - name: "Wait for connection on all hosts."
   wait_for:
-    host: "{{ item.private_ip }}"
+    host: "{{ item.private_ip_address }}"
     port: 22
     timeout: 300
   loop: "{{ ec2.tagged_instances }}"
