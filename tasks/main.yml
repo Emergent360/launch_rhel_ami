@@ -61,4 +61,6 @@
     port: 22
     timeout: 300
   loop: "{{ ec2.tagged_instances }}"
+  loop_control:
+    label: "{{ item.private_ip }}"
 
