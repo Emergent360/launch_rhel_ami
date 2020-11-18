@@ -53,7 +53,7 @@
       Name: "{{ instance_tag_inventory }} RHEL server {{ item }}"
       Inventory: "{{ instance_tag_inventory }}"
       Stage: "instantiated"
-  loop: "{{ range(1, instance_count +1) }}"
+  loop: "{{ range(1, instance_count +1)|list }}"
   register: ec2
 
 - name: "Wait for connection on all hosts."
