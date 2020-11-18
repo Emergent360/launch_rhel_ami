@@ -58,9 +58,6 @@
     label: "{{ item }}"
   register: ec2
 
-- debug:
-    var: ec2
-
 - name: "Wait for connection on all hosts."
   wait_for:
     host: "{{ item['tagged_instances'][0]['private_ip'] }}"
