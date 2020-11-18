@@ -54,6 +54,8 @@
       Inventory: "{{ instance_tag_inventory }}"
       Stage: "instantiated"
   loop: "{{ range(1, instance_count +1)|list }}"
+  loop_control:
+    label: "{{ item }}"
   register: ec2
 
 - name: "Wait for connection on all hosts."
