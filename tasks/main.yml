@@ -63,10 +63,10 @@
 
 - name: "Wait for connection on all hosts."
   wait_for:
-    host: "{{ item.private_ip }}"
+    host: "{{ item['instances'][0]['private_ip'] }}"
     port: 22
     timeout: 300
-  loop: "{{ ec2.tagged_instances }}"
+  loop: "{{ ec2.results }}"
   loop_control:
-    label: "{{ item.private_ip }}"
+    label: "{{ item['instances'][0]['private_ip'] }}"
 
