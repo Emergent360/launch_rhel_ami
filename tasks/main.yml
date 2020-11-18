@@ -62,7 +62,7 @@
   wait_for:
     host: "{{ item['tagged_instances'][0]['private_ip'] }}"
     port: 22
-    timeout: 300
+    timeout: 500
   loop: "{{ ec2.results }}"
   loop_control:
     label: "{{ item['tagged_instances'][0]['private_ip'] }}"
