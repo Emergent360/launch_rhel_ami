@@ -50,7 +50,7 @@
   set_fact:
     subnet_id: "{{ subnet_info.subnets | json_query(subnet_query) }}"
   vars:
-    subnet_query: "[?tags.Name=='^.*-{{ tier }}-{{ zone }}'].subnet_id"
+    subnet_query: "[?tags.Name=='{{ ec2_name_prefix }}-{{ tier }}-{{ zone }}'].subnet_id"
 
 - name: "Find current, region-specific AMI."
   ec2_ami_info:
