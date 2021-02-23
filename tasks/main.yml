@@ -31,11 +31,6 @@
   vars:
     group_query: "[?group_name=='{{ ec2_name_prefix }}-Private-SG'].group_id"
   when: tier == "Private"
-
-- debug:
-    msg: "{{ tier }}"
-- debug:
-    msg: "{{ zone }}"
     
 - name: Get the subnet info for {{ ec2_name_prefix }}-vpc
   ec2_vpc_subnet_info:
@@ -43,6 +38,13 @@
     filters:
       vpc-id: "{{ vpc_net_facts.vpcs[0].id }}"
   register: subnet_info
+
+- debug:
+    msg: "{{ tier }}"
+- debug:
+    msg: "{{ zone }}"
+- debug:
+    msg: "{{ subnet_info.subnets }}"
 
 - name: Select Subnet ID
   set_fact:
