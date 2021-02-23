@@ -39,7 +39,7 @@
       vpc-id: "{{ vpc_net_facts.vpcs[0].id }}"
   register: subnet_info
 
-- name Select Subnet ID
+- name: Select Subnet ID
   set_fact:
     subnet_id: "{{ subnet_info.subnets | json_query(subnet_query) }}"
   vars:
