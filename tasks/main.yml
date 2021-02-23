@@ -9,7 +9,7 @@
 
 - name: Set the VPC ID
   set_fact:
-    vpc_id: "{{ vpc_id }}"
+    vpc_id: "{{ vpc_net_facts.vpcs[0].id }}"
 
 - name: Get the SG info for {{ ec2_name_prefix }}-vpc
   ec2_group_info:
