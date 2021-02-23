@@ -39,27 +39,11 @@
       vpc-id: "{{ vpc_net_facts.vpcs[0].id }}"
   register: subnet_info
 
-- name: Select Public subnets
+- name Select Subnet ID
   set_fact:
-    subnet_data: "{{ subnet_info.subnets
-      | selectattr('tags.Name', 'search', '^.*-Public-.*$')
-      | list
-    }}"
-  when: tier == "Public"
-
-- name: Select Private subnets
-  set_fact:
-    subnet_data: "{{ subnet_info.subnets
-      | selectattr('tags.Name', 'search', '^.*-Private-.*$')
-      | list
-    }}"
-  when: tier == "Private"
-
-- name: Set subnet list
-  set_fact:
-    subnet_list: "{{ subnet_data | json_query(subnet_query) }}"
+    subnet_id: "{{ subnet_info.subnets | json_query(subnet_query) }}"
   vars:
-    subnet_query: "[*].{id: subnet_id, name: tags.Name}"
+    subnet_query: "[?tags.Name=='^.*-{{ tier }}-{{ zone }}'].subnet_id"
 
 - name: "Find current, region-specific AMI."
   ec2_ami_info:
