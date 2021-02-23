@@ -48,7 +48,7 @@
 
 - name: Select Subnet ID
   set_fact:
-    subnet_id: "{{ subnet_info.subnets | json_query(subnet_query) }}"
+    subnet_id: "{{ subnet_info.subnets | json_query(subnet_query) | first }}"
   vars:
     subnet_query: "[?tags.Name=='{{ ec2_name_prefix }}-{{ tier }}-{{ zone }}'].subnet_id"
 
