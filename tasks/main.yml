@@ -69,12 +69,12 @@
     wait_timeout: 300
     exact_count: 1
     count_tag:
-      Name: "{{ instance_tag_inventory }} RHEL server {{ item }}"
+      Name: "{{ ec2_name_prefix }} RHEL server {{ item }}"
     instance_tags:
       Role: rhel_server
       Platform: RHEL
-      Name: "{{ instance_tag_inventory }} RHEL server {{ item }}"
-      Inventory: "{{ instance_tag_inventory }}"
+      Name: "{{ ec2_name_prefix }} RHEL server {{ item }}"
+      Inventory: "{{ ec2_name_prefix }}"
       Stage: "instantiated"
   loop: "{{ range(1, instance_count +1)|list }}"
   loop_control:
