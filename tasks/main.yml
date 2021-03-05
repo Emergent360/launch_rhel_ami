@@ -36,7 +36,7 @@
   ec2_vpc_subnet_info:
     region: "{{ ec2_region }}"
     filters:
-      vpc-id: "{{ vpc_net_facts.vpcs[0].id }}"
+      vpc-id: "{{ vpc_id }}"
   register: subnet_info
 
 - name: Select Subnet ID
@@ -54,14 +54,14 @@
 
 - name: "Set AMI value"
   set_fact:
-    rhel_ami: "{{ found_amis.images | selectattr('name', 'defined') | sort(attribute='creation_date') | last }}"
+    target_ami: "{{ found_amis.images | selectattr('name', 'defined') | sort(attribute='creation_date') | last }}"
   when: found_amis.images is defined
 
-- name: "Start RHEL instances."
+- name: "Start instances."
   ec2:
     key_name: "{{ ec2_name_prefix }}-key"
     region: "{{ ec2_region }}"
-    image: "{{ rhel_ami.image_id }}"
+    image: "{{ target_ami.image_id }}"
     instance_type: "{{ instance_type }}"
     group_id: "{{ group_id }}"
     vpc_subnet_id: "{{ subnet_id }}"
