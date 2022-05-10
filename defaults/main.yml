@@ -1,7 +1,12 @@
 ---
 # defaults file for launch_rhel_ami
 ec2_name_prefix: Test
-ec2_region: us-east-1
-ami_name: "RHEL-8.2-x86_64-Minimal-10GiB-HVM*"
-instance_type: t2.medium
+tier: Public
+zone: A
+instance_name: RHEL server
+instance_role: Server
+instance_platform: RHEL
 instance_count: 1
+ami_name: "RHEL-8.2.0_HVM-20200423-x86_64-0-Hourly2-GP2"
+instance_type: t2.medium
+ec2_region: us-east-1
