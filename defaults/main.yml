@@ -1,7 +1,7 @@
 ---
 # defaults file for launch_rhel_ami
 ec2_name_prefix: Test
-tier: Public
+tier: "Public"
 zone: A
 instance_name: RHEL server
 instance_role: Server
